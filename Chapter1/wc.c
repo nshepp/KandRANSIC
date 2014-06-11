@@ -10,6 +10,8 @@ int main()
 {
   int c, nl, nw, nc, state;
   
+  printf("sizeof(int)=%ld\n", sizeof(int));
+  
   state = OUT;
   nl = nw = nc = 0;
   
