@@ -14,19 +14,14 @@ int main()
   
   while((c = getchar()) != EOF )
   {
-/*    printf("state = %d", state); */
-    
     if (c == ' ' || c == '\n' || c == '\t')
     {
+      if (state == IN) putchar('\n');
       state = OUT;
-    } 
-    else if (state == OUT) 
-    {
-      state = IN;
-      putchar('\n');
     }
     else
     {
+      state = IN;
       putchar(c);      
     }
   }
