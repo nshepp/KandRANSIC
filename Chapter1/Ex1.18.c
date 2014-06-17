@@ -2,9 +2,9 @@
 #define MAXLINE 1000     /* Maximum length of an input string */
 
 int mygetline(char line[], int maxline);
-bool iswhitespace(char c);
+int iswhitespace(char c);
 
-/* print all lines longer than MAXLINE */
+/* delete trailing whitespace */
 
 main()
 {
@@ -12,7 +12,11 @@ main()
   char line[MAXLINE+2];          /* current input line plus '\n' and '\0' */
   
   while ((len = mygetline(line, MAXLINE)) > 0)
-    printf("%s\n", trimline(line,len));
+    if (len>2)
+    {
+       trimline(line,len);
+       printf("%s", line);
+    }
   return 0;
 }
 
@@ -35,21 +39,21 @@ int mygetline(char s[], int lim)
   return i;
 }
 
-bool iswhitespace(char c)
+int iswhitespace(char c)
 {
-  if (c==' ' || c=='\b' || '\t')
-    return true;
+  if (c==' ' || c=='\b' || c=='\t'|| c=='\n')
+    return 1;
   else
-    return false;
+    return 0;
 }
 
 int trimline(char s[], int len)
 {
   int i;
   
-  for (i=len-1; i<=0; i--)
+  for (i=len-2; i<=0; i--)
   {
-    if (iswhitespace(s[i])
+    if (iswhitespace(s[i]))
       s[i] ='\0';
     else
       break;
