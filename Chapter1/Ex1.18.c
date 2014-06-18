@@ -3,20 +3,26 @@
 
 int mygetline(char line[], int maxline);
 int iswhitespace(char c);
+void trimline(char s[], int len);
 
 /* delete trailing whitespace */
 
 main()
 {
   int len;                       /* current line length */
-  char line[MAXLINE+2];          /* current input line plus '\n' and '\0' */
+  char line[MAXLINE+1];          /* current input line plus '\0' */
   
-  while ((len = mygetline(line, MAXLINE)) > 0)
-    if (len>2)
+  while ((len = mygetline(line, MAXLINE)) != EOF)
+    if (len>0)
     {
        trimline(line,len);
-       printf("%s", line);
+       printf("%s\n", line);
     }
+    else
+    {
+      /* skip line */
+    }
+  
   return 0;
 }
 
@@ -26,17 +32,15 @@ int mygetline(char s[], int lim)
   int c, i;
   
   for (i = 0; (c = getchar()) !=EOF && c!='\n'; ++i)
-    if (i <= lim)
+    if (i < lim)
       s[i] = c;
   if (i<lim)
-    lim = i;    
-  if (c == '\n')
-  {
-    s[lim] = c;
-    ++i;
-  }
-  s[lim+1] = '\0';
-  return i;
+    lim = i;
+  s[lim] = '\0';
+  if (c == EOF)
+    return EOF;
+  else
+    return i;
 }
 
 int iswhitespace(char c)
@@ -47,17 +51,15 @@ int iswhitespace(char c)
     return 0;
 }
 
-int trimline(char s[], int len)
+void trimline(char s[], int len)
 {
   int i;
   
-  for (i=len-2; i<=0; i--)
+  for (i=len-1; i>=0; i--)
   {
     if (iswhitespace(s[i]))
       s[i] ='\0';
     else
       break;
   }
-  
-  return i;
 }
