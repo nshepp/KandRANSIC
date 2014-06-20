@@ -43,14 +43,19 @@ void detab(char s[], int tab_width)
   int i, j, len, tabs=0, newlen, shift;
   char c;
   
+  /* Finds string length 'len' and counts tabs */
+  i = 0;
   len = 0;
-  while (s[len]!='\0')
+  while (s[i]!='\0')
   {
-    if (s[len]=='\t') tabs++;
+    if (s[i++]=='\t') tabs++;
     len++;
   }
-    
+  
+  /* shift moves string along the equivalent length of new tabs */
   shift = tabs * (tab_width-1);
+  
+  /* new length of original string plus alotted for new spaces */
   newlen = len + shift;
   
   /* Move string including '\0' */
@@ -68,8 +73,8 @@ void detab(char s[], int tab_width)
     c = s[i+shift];
     if (c=='\t')
     {
-      tabs++;
-      for (j=0; j<tab_width; j++) s[i+j] = ' '; 
+      for (j=0; j<tab_width; j++) s[i+tabs*(tab_width-1)+j] = ' ';
+      tabs++; 
     }
     else
       s[i+tabs*(tab_width-1)] = c;
