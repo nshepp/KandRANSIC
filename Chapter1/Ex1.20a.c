@@ -40,13 +40,14 @@ int mygetline(char s[], int lim)
 
 void detab(char s[], int tab_width)
 {
-  int i, j, len;
+  int i, j, k, len, spaces;
   char c;
   
   /* Finds string length 'len' */
   len = 0;
   while (s[len]!='\0') len++;
   
+  /* detabs */
   i = 0;
   while (i < len)
   {
@@ -65,58 +66,15 @@ void detab(char s[], int tab_width)
         j--;
       }
       
-      /* TO DO: backfill with blanks */
+      /* backfill with blanks */
+      for(k = 0; k <= spaces; k++) s[i+k] = ' ';
       
-      for(k = 0; k < tab_width; k++) s[i+k] = ' ';
+      i += spaces + 1;
       
-      
-      
-    }
-    
-  }
-  
-
-
-
-
-
-
-
-  int i, j, len, tabs=0, newlen, shift;
-  char c;
-  
-  /* Finds string length 'len' and counts tabs */
-  i = 0;
-  len = 0;
-  while (s[i]!='\0') len++;
-  
-  /* shift moves string along the equivalent length of new tabs */
-  shift = tabs * (tab_width-1);
-  
-  /* new length of original string plus alotted for new spaces */
-  newlen = len + shift;
-  
-  /* Move string including '\0' */
-  i = len;
-  while (i>=0)
-  {
-    s[i+shift] = s[i];
-    i--;
-  }
-
-  /* Traverse string starting at the front */
-  i = 0; tabs = 0;
-  while (i<len)
-  {
-    c = s[i+shift];
-    if (c=='\t')
-    {
-      for (j=0; j<tab_width; j++) s[i+tabs*(tab_width-1)+j] = ' ';
-      tabs++; 
+      len += spaces;
     }
     else
-      s[i+tabs*(tab_width-1)] = c;
-    
-    i++;
+      i++;
   }
+  
 }

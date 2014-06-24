@@ -1,3 +1,1 @@
-s[in] = Bl	oat	er
-s[out] = Bl	oatBl	oat	er
-Bl    oat    er
+        Bloater
