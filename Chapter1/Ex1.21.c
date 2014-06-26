@@ -54,7 +54,7 @@ void entab(char s[], int tab_width)
   {
     c = s[i];
     
-    if(c == ' ')
+    if(c==' ' && i>0)
     {
       /* is previous character on a tab stop */
       if ((i+1)%tab_width == 0)
@@ -68,8 +68,12 @@ void entab(char s[], int tab_width)
     {
       /* writes tabs over spaces */
       j = 0;
-      while (j++ < tabs) s[i+j+1] = '\t';
-      
+      while (j < tabs)
+      {
+        s[i+j+1] = '\t';
+        j++;
+      }
+        
       /* index of start character for previous word */
       idx = i + whitespaces + 1;
       
