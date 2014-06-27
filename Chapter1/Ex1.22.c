@@ -29,7 +29,7 @@ int mygetline(char s[], int lim)
   for (i = 0; (c = getchar()) !=EOF && c!='\n'; ++i)
     if (i < lim)
       s[i] = c;
-  if (i<lim)
+  if (i < lim)
     lim = i;
   s[lim] = '\0';
   if (c == EOF)
@@ -42,6 +42,44 @@ void linewrap(char s[], int wrap_col)
 {
   int i, len;
   char c;
+  
+  /* break lines */
+  i = 0;
+  while (s[i]!='\0') 
+  {
+    c = s[i];
+    
+    if ((i+1)%wrap_col == 0)
+    {
+      if (s[i+1] == '\0')
+      {
+        return;
+      }
+      else if (isblank(c))
+      {
+        /* if blank, put newline char after moving 1 space */ 
+        
+      }
+      else
+      {
+        /* if char, either enter new line if blank after moving 1, or hyphenate and move 2 spaces for new line */ 
+        
+      }
+      
+      if (isblank(c))
+        s[i] = '\n';
+      else
+          
+        
+    i++;
+  }
+  
+  
+  
+  
+  
+  
+  
   
   /* Finds string length 'len' */
   len = 0;
@@ -70,4 +108,12 @@ void linewrap(char s[], int wrap_col)
 
     }  
   }  
+}
+
+int isblank(char c)
+{
+  if (c==' ' || c=='\t')
+    return 1;
+  else
+    return 0; 
 }
