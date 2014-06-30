@@ -4,8 +4,10 @@
 
 int mygetline(char line[], int maxline);
 void linewrap(char s[], int tab_width);
+void oneblank(char s[]);
+int isblank(char c);
 
-/* entabs a string */
+/* wraps a string to next line */
 
 main()
 {
@@ -40,74 +42,7 @@ int mygetline(char s[], int lim)
 
 void linewrap(char s[], int wrap_col)
 {
-  int i, len;
-  char c;
-  
-  /* break lines */
-  i = 0;
-  while (s[i]!='\0') 
-  {
-    c = s[i];
-    
-    if ((i+1)%wrap_col == 0)
-    {
-      if (s[i+1] == '\0')
-      {
-        return;
-      }
-      else if (isblank(c))
-      {
-        /* if blank, put newline char after moving 1 space */ 
-        
-      }
-      else
-      {
-        /* if char, either enter new line if blank after moving 1, or hyphenate and move 2 spaces for new line */ 
-        
-      }
-      
-      if (isblank(c))
-        s[i] = '\n';
-      else
-          
-        
-    i++;
-  }
-  
-  
-  
-  
-  
-  
-  
-  
-  /* Finds string length 'len' */
-  len = 0;
-  while (s[len]!='\0') len++;
-  
-  if (len < wrap_col) 
-    return;
-  else 
-  {
-    if (c!=' ' || c!='\t')
-    {
-      /* move word along 2 characters to place hyphen and newline char */
-      i = len;
-      do
-      {
-        c = s[i];
-        
-        s[i+2] = c;
-        
-        i--;
-      }
-      while (i>=wrap_col);
-      
-      s[wrap_col] = '-';
-      s[wrap_col+1] = '\n';
-
-    }  
-  }  
+  oneblank(s);
 }
 
 int isblank(char c)
@@ -116,4 +51,34 @@ int isblank(char c)
     return 1;
   else
     return 0; 
+}
+
+/* compress whitespace to one blank character */
+void oneblank(char s[])
+{
+  int i = 0, ws = 0, shift = 0;
+  
+  while (s[i]!='\0')
+  {
+    if (isblank(s[i]))
+    {
+      ws++;
+    }
+    else if (ws > 1)
+    {
+      shift = ws;
+      
+      ws = 0;
+      
+      s[i-shift] = s[i];
+    }    
+    else /* non-blank */
+    {
+      s[i-shift] = s[i];
+    }
+    
+    i++;
+  }
+  
+  s[i-shift] = '\0';
 }
