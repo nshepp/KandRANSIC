@@ -1,6 +1,6 @@
 #include <stdio.h>
 #define MAXLINE 1000     /* Maximum length of an input string */
-#define WRAP_COL 16      /* Column at which the line is wrapped */
+#define WRAP_COL 30      /* Column at which the line is wrapped */
 
 int mygetline(char line[], int maxline);
 void linewrap(char s[], int tab_width);
@@ -56,26 +56,32 @@ int isblank(char c)
 /* compress whitespace to one blank character */
 void oneblank(char s[])
 {
-  int i = 0, ws = 0, shift = 0;
+  int i = 0, ws = 0 /* whitespace count */, wc = 0 /* word count */, shift = 0, inword = 0;
+  char c;
   
   while (s[i]!='\0')
   {
-    if (isblank(s[i]))
+    c = s[i];
+    
+    /* outside word */
+    if (isblank(c))
     {
+      inword = 0;
       ws++;
     }
-    else if (ws > 1)
+    else /* inside word */
     {
-      shift = ws - 1;
-      
-      ws = 0;
-      
-      s[i-shift] = s[i];
-    }    
-    else /* non-blank */
-    {
-      s[i-shift] = s[i];
+      if (!inword) wc++;
+      inword = 1;
     }
+    
+    if (inword && ws>0)
+      shift = ws - wc + 1;
+    else
+      shift = 0;
+    
+    s[i-shift] = c;
+    if (shift > 0) s[i] = ' ';
     
     i++;
   }
