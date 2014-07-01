@@ -66,7 +66,7 @@ void oneblank(char s[])
     }
     else if (ws > 1)
     {
-      shift = ws;
+      shift = ws - 1;
       
       ws = 0;
       
