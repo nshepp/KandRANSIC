@@ -3,7 +3,7 @@
 #define WRAP_COL 30      /* Column at which the line is wrapped */
 
 int mygetline(char line[], int maxline);
-void linewrap(char s[], int tab_width);
+void linewrap(char s[], int len, int tab_width);
 void oneblank(char s[]);
 int isblank(char c);
 
@@ -17,7 +17,7 @@ main()
   while ((len = mygetline(line, MAXLINE)) != EOF)
     if (len>0)
     {
-       linewrap(line, WRAP_COL);
+       linewrap(line, len, WRAP_COL);
        printf("%s\n", line);
     }
   return 0;
@@ -40,9 +40,53 @@ int mygetline(char s[], int lim)
     return i;
 }
 
-void linewrap(char s[], int wrap_col)
+void linewrap(char s[], int len, int wrap_col)
 {
+  int i, j, k;
+  char c;
+  
   oneblank(s);
+
+  if (len <= wrap_col) return;
+  
+  /* break lines */
+  i = 0;
+  do
+  {
+    i += wrap_col;
+    
+    c = s[i];
+
+    if (isblank(c))
+      s[i] = '\n';
+    else
+    {
+      j = i;
+      while (!isblank(s[j]) && i-j<=wrap_col)
+        j--;
+      
+      if (j == wrap_col) /* hyphenate */
+      {
+        /* move word along 2 characters to place hyphen and newline char */
+        k = len;
+        do
+        {
+          c = s[k];
+        
+          s[k+2] = c;
+        
+          k--;
+        }
+        while (k>=i);
+      
+        s[i] = '-';
+        s[i+1] = '\n';
+      }       
+      else /* break line */
+        s[j] = '\n';
+    }  
+  }
+  while (i < len);
 }
 
 int isblank(char c)
