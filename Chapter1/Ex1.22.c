@@ -1,6 +1,6 @@
 #include <stdio.h>
 #define MAXLINE 1000     /* Maximum length of an input string */
-#define WRAP_COL 30      /* Column at which the line is wrapped */
+#define WRAP_COL 80      /* Column at which the line is wrapped */
 
 int mygetline(char line[], int maxline);
 void linewrap(char s[], int len, int tab_width);
@@ -11,8 +11,13 @@ int isblank(char c);
 
 main()
 {
+  int i;
   int len;                       /* current line length */
   char line[MAXLINE+1];          /* current input line plus '\0' */
+  
+  for (i=0; i<WRAP_COL; i++)
+    printf("%1d", i%10);
+  printf("\n\n");
   
   while ((len = mygetline(line, MAXLINE)) != EOF)
     if (len>0)
@@ -50,11 +55,9 @@ void linewrap(char s[], int len, int wrap_col)
   if (len <= wrap_col) return;
   
   /* break lines */
-  i = 0;
+  i = wrap_col;
   do
-  {
-    i += wrap_col;
-    
+  {    
     c = s[i];
 
     if (isblank(c))
@@ -62,10 +65,10 @@ void linewrap(char s[], int len, int wrap_col)
     else
     {
       j = i;
-      while (!isblank(s[j]) && i-j<=wrap_col)
+      while (!isblank(s[j]) && i-j<wrap_col)
         j--;
       
-      if (j == wrap_col) /* hyphenate */
+      if ((i-j) == wrap_col) /* hyphenate */
       {
         /* move word along 2 characters to place hyphen and newline char */
         k = len;
@@ -77,14 +80,22 @@ void linewrap(char s[], int len, int wrap_col)
         
           k--;
         }
-        while (k>=i);
+        while (k>=i-1);
       
-        s[i] = '-';
-        s[i+1] = '\n';
+        s[i-1] = '-';
+        s[i] = '\n';
+        
+        len += 2; /* effective length of string has increased by two chars: '-' and '\n' */
+    
+        i += wrap_col + 1; /* account for '-' */
       }       
       else /* break line */
+      {
         s[j] = '\n';
-    }  
+            
+        i += wrap_col;
+      }
+    }
   }
   while (i < len);
 }
