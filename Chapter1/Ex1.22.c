@@ -1,11 +1,12 @@
 #include <stdio.h>
 #define MAXLINE 1000     /* Maximum length of an input string */
-#define WRAP_COL 80      /* Column at which the line is wrapped */
+#define WRAP_COL 30      /* Column at which the line is wrapped */
 
 int mygetline(char line[], int maxline);
 void linewrap(char s[], int len, int tab_width);
 void oneblank(char s[]);
 int isblank(char c);
+void moveright(char s[], int len, int shift);
 
 /* wraps a string to next line */
 
@@ -70,18 +71,8 @@ void linewrap(char s[], int len, int wrap_col)
       
       if ((i-j) == wrap_col) /* hyphenate */
       {
-        /* move word along 2 characters to place hyphen and newline char */
-        k = len;
-        do
-        {
-          c = s[k];
+        moveright(&s[i], len-i, 2);
         
-          s[k+2] = c;
-        
-          k--;
-        }
-        while (k>=i-1);
-      
         s[i-1] = '-';
         s[i] = '\n';
         
@@ -142,4 +133,20 @@ void oneblank(char s[])
   }
   
   s[i-shift] = '\0';
+}
+
+/* move word along 2 characters to place hyphen and newline char */
+void moveright(char s[], int len, int shift)
+{
+  char c;
+  int k = len;
+  do
+  {
+    c = s[k];
+
+    s[k+shift] = c;
+
+    k--;
+  }
+  while (k>=0);
 }
