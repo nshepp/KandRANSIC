@@ -84,7 +84,7 @@ void linewrap(char s[], int len, int wrap_col)
       {
         s[j] = '\n';
             
-        i += wrap_col;
+        i = j + 1 + wrap_col;
       }
     }
   }
