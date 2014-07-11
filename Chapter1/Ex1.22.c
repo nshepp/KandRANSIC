@@ -49,7 +49,7 @@ int mygetline(char s[], int lim)
 void linewrap(char s[], int len, int wrap_col)
 {
   int i, j, k;
-  char c;
+  char c, d;
   
   oneblank(s);
 
@@ -60,6 +60,8 @@ void linewrap(char s[], int len, int wrap_col)
   do
   {    
     c = s[i];
+    d = s[i+1];
+    printf("i, c, d = %d, %c, %c\n", i, c, d);
 
     if (isblank(c))
       s[i] = '\n';
@@ -69,8 +71,11 @@ void linewrap(char s[], int len, int wrap_col)
       while (!isblank(s[j]) && i-j<wrap_col)
         j--;
       
-      if ((i-j) == wrap_col) /* hyphenate */
+      
+      if ((i-j)==wrap_col && !isblank(d)) /* hyphenate */
       {
+        printf("Hyphenate line\n");
+        
         moveright(&s[i], len-i, 2);
         
         s[i-1] = '-';
@@ -82,6 +87,8 @@ void linewrap(char s[], int len, int wrap_col)
       }       
       else /* break line */
       {
+        printf("Break line\n");
+        
         s[j] = '\n';
             
         i = j + 1 + wrap_col;
