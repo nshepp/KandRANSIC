@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <unistd.h>
+
 #define MAXLINE 1000     /* Maximum length of an input string */
 #define WRAP_COL 30      /* Column at which the line is wrapped */
 
@@ -10,15 +12,20 @@ void moveright(char s[], int len, int shift);
 
 /* wraps a string to next line */
 
-int main()
+int main(int argc, char *argv[])
 {
     int i;
     int len;                       /* current line length */
     char line[MAXLINE+1];          /* current input line plus '\0' */
     
+    for (i=0; i<argc; i++)
+        printf("argv[%d] = %s\n", i, argv[i]);
+    
     for (i=0; i<WRAP_COL; i++)
         printf("%1d", i%10);
     printf("\n\n");
+    
+    pause();
     
     while ((len = mygetline(line, MAXLINE)) != EOF)
         if (len>0)
@@ -34,7 +41,7 @@ int mygetline(char s[], int lim)
 {
     int c, i;
     
-    for (i = 0; (c = getchar()) !=EOF && c!='\n'; ++i)
+    for (i = 0; (c = getchar())!=EOF && c!='\n'; ++i)
         if (i < lim)
             s[i] = c;
     if (i < lim)
@@ -62,7 +69,7 @@ void linewrap(char s[], int len, int wrap_col)
         c = s[i];
         d = s[i+1];
         printf("i, c, d = %d, %c, %c\n", i, c, d);
-        
+       
         if (myisblank(c))
             s[i] = '\n';
         else
