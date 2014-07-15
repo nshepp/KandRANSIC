@@ -1,0 +1,3 @@
+"Bloater is a very bad bloat"
+"\"Bloater is very bad indeed\""
+"Mr. Kiwi \" is very good"
