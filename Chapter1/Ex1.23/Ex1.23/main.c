@@ -32,10 +32,15 @@ int main(int argc, const char * argv[])
         if (c=='*' && pc=='/' && instring==0)
             incomment=1;
         else if (c=='/' && pc=='*' && instring==0)
+        {
             incomment=0;
+            c = getchar();
+            pc = c;
+            c = getchar();
+        }
         
         if (incomment == 0)
-            putchar(c); fflush(NULL);
+            putchar(pc); fflush(NULL);
         
         pc = c;
     }
