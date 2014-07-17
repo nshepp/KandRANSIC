@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <unistd.h>
 
+#define FLUSH fflush(NULL);
+
 int main(int argc, const char * argv[])
 {
     int i, instring = 0, incomment = 0;
@@ -33,14 +35,15 @@ int main(int argc, const char * argv[])
             incomment=1;
         else if (c=='/' && pc=='*' && instring==0)
         {
-            incomment=0;
+            incomment=0; /* TODO: explore backspace in lieu of getchar twice */
             c = getchar();
             pc = c;
             c = getchar();
         }
         
-        if (incomment == 0)
-            putchar(pc); fflush(NULL);
+        if (incomment == 0) {
+            putchar(pc); FLUSH
+        }
         
         pc = c;
     }
