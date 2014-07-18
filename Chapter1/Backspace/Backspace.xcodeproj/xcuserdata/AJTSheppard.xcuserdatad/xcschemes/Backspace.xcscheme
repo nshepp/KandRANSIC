@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "893F932B1975885200F26099"
-               BuildableName = "Ex1.23"
-               BlueprintName = "Ex1.23"
-               ReferencedContainer = "container:Ex1.23.xcodeproj">
+               BlueprintIdentifier = "8948129819797D4500F2968C"
+               BuildableName = "Backspace"
+               BlueprintName = "Backspace"
+               ReferencedContainer = "container:Backspace.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "893F932B1975885200F26099"
-            BuildableName = "Ex1.23"
-            BlueprintName = "Ex1.23"
-            ReferencedContainer = "container:Ex1.23.xcodeproj">
+            BlueprintIdentifier = "8948129819797D4500F2968C"
+            BuildableName = "Backspace"
+            BlueprintName = "Backspace"
+            ReferencedContainer = "container:Backspace.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -51,18 +51,12 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "893F932B1975885200F26099"
-            BuildableName = "Ex1.23"
-            BlueprintName = "Ex1.23"
-            ReferencedContainer = "container:Ex1.23.xcodeproj">
+            BlueprintIdentifier = "8948129819797D4500F2968C"
+            BuildableName = "Backspace"
+            BlueprintName = "Backspace"
+            ReferencedContainer = "container:Backspace.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "&lt; Bloater15.c"
-            isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -75,10 +69,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "893F932B1975885200F26099"
-            BuildableName = "Ex1.23"
-            BlueprintName = "Ex1.23"
-            ReferencedContainer = "container:Ex1.23.xcodeproj">
+            BlueprintIdentifier = "8948129819797D4500F2968C"
+            BuildableName = "Backspace"
+            BlueprintName = "Backspace"
+            ReferencedContainer = "container:Backspace.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

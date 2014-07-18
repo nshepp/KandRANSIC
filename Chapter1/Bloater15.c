@@ -2,8 +2,8 @@
 
 /* Bloater is tragically good looking */
 int main(int argc, const char * argv[])
-  { /*    */"" 
-    char c; /* not "/*" or  "*/" */
+  { printf("/*       */");
+    char c; /* not "/*" or "*/
     while ((c = getchar())!=EOF)
     {
          putchar(c);   /* Puts character to output *//* another comment */
@@ -11,3 +11,4 @@ int main(int argc, const char * argv[])
     return 0;
 }
 
+/* /* /* /* /* /* */
