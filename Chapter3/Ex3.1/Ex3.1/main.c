@@ -78,8 +78,12 @@ int binsearch1(int x, int v[], int n)
 
     low = 0;
     high = n - 1;
-    while (low<=high && v[(mid = low + (high-low) / 2)] != x)
+    while (low<=high) // && v[(mid = low + (high-low) / 2)] != x)
     {
+        mid = low + (high-low) / 2;
+        
+        if (v[mid] == x) break;
+        
         if (v[mid] > x)
             high = mid - 1;
         else
