@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>25DBD522-362C-4F18-B5F8-AECF58EF856A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Ex3.2</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>8C2F366D-A22E-42F5-BFC1-5BD8991E615B</key>
+		<string>https://github.com/nshepp/KandRANSIC.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Chapter3/Ex3.2/Ex3.2.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>8C2F366D-A22E-42F5-BFC1-5BD8991E615B</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/nshepp/KandRANSIC.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>8C2F366D-A22E-42F5-BFC1-5BD8991E615B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8C2F366D-A22E-42F5-BFC1-5BD8991E615B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>KandRANSIC</string>
+		</dict>
+	</array>
+</dict>
+</plist>
