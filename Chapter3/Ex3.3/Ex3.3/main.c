@@ -42,34 +42,39 @@ void expand(char s1[], char s2[])
     int i=0, j=0;
     char c;
     
-    while ((c=s[i]) != '\0')
+    while ((c=s1[i]) != '\0')
     {
         switch (c) {
             case '0': case '1': case '2': case '3': case '4':
             case '5': case '6': case '7': case '8': case '9':
-                if (t[i+1] == 't') {
-                    s[j++] = '\t'; i++;
-                } else if (t[i+1] == 'n') {
-                    s[j++] = '\n'; i++;
-                } else
-                    s[j++] = '\\';
-                break;
+                
             case 'A': case 'B': case 'C': case 'D': case 'E':
             case 'F': case 'G': case 'H': case 'I': case 'J':
             case 'K': case 'L': case 'O': case 'M': case 'N':
             case 'P': case 'Q': case 'R': case 'S': case 'T':
             case 'U': case 'V': case 'W': case 'X': case 'Y':
             case 'Z':
-                break;
+                
             case 'a': case 'b': case 'c': case 'd': case 'e':
             case 'f': case 'g': case 'h': case 'i': case 'j':
             case 'k': case 'l': case 'o': case 'm': case 'n':
             case 'p': case 'q': case 'r': case 's': case 't':
             case 'u': case 'v': case 'w': case 'x': case 'y':
             case 'z':
-                break;
+                /* is next char "-" ? */
+                /* if the char following A-Za-z0-9 ? */
+                /* if yes to both questions, then possibly an expansion,
+                   but ONLY if for x-y the condition x<y holds true
+                   for x, y in the char range A-Za-z0-9 */
+                /* s[i+1] != '\0' ? ((s[i+1] == '-') ? : b;) : break; */
+                /* step forward again */;
+                
+                
+                
+     
+                 
             default:
-                s[j++] = t[i];
+                s2[j++] = s1[i];
                 break;
         }
         
@@ -78,4 +83,34 @@ void expand(char s1[], char s2[])
     }
     
     
+}
+
+char nextASCII(const char c)
+{
+    switch (c) {
+        case '0': case '1': case '2': case '3': case '4':
+        case '5': case '6': case '7': case '8': /* case '9': */
+            return c+1;
+        
+        case 'A': case 'B': case 'C': case 'D': case 'E':
+        case 'F': case 'G': case 'H': case 'I': case 'J':
+        case 'K': case 'L': case 'O': case 'M': case 'N':
+        case 'P': case 'Q': case 'R': case 'S': case 'T':
+        case 'U': case 'V': case 'W': case 'X': case 'Y':
+            return c+1;
+        
+        /* skip [ ... ' */
+        case 'Z':
+            return 'a';
+        
+        case 'a': case 'b': case 'c': case 'd': case 'e':
+        case 'f': case 'g': case 'h': case 'i': case 'j':
+        case 'k': case 'l': case 'o': case 'm': case 'n':
+        case 'p': case 'q': case 'r': case 's': case 't':
+        case 'u': case 'v': case 'w': case 'x': case 'y':
+        /* case 'z': */
+            return c+1;
+    }
+    
+    return 0; /* null char */
 }
