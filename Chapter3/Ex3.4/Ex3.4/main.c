@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <limits.h>
+#include <assert.h>
+#include <string.h>
 #define MAXLEN 1023
 
 void reverse(char s[]);
@@ -27,13 +29,31 @@ int main(int argc, const char * argv[])
     
     printf("INT_MAX = %d, INT_MIN = %d\n", INT_MAX, INT_MIN);
     
+    // Test 1: INT_MAX
     itoa(INT_MAX, s);
-    
+    assert(strcmp(s, "2147483647") == 0);
     printf("INT_MAX = %s\n", s);
     
+    // Test 2: INT_MIN
     itoa(INT_MIN, s);
-    
+    assert(strcmp(s, "-2147483648") == 0);
     printf("INT_MIN = %s\n", s);
+    
+    // Test 3: 123456789
+    itoa(123456789, s);
+    assert(strcmp(s, "123456789") == 0);
+    printf("123456789 = %s\n", s);
+    
+    // Test 4: -123456789
+    itoa(-123456789, s);
+    assert(strcmp(s, "-123456789") == 0);
+    printf("-123456789 = %s\n", s);
+    
+    // Test 5: 0
+    itoa(0, s);
+    assert(strcmp(s, "0") == 0);
+    printf("0 = %s\n", s);
+    
     
     return 0;
 }
