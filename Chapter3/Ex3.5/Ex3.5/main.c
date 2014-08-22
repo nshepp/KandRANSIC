@@ -8,7 +8,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <limits.h>
 #include <assert.h>
 #include <string.h>
@@ -23,6 +22,7 @@ void reverse(char s[]);
 void itob(int n, char s[], int b);
 char nextdigit(const char c);
 void addone(char s[], int b);
+char increment(char c, int b);
 
 char digits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
@@ -31,14 +31,11 @@ char digits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
 
 int main(int argc, const char * argv[])
 {
-    char c;
     char s[MAXLEN];
-    int i, b = 10;
+    int i;
     
     for (i=0; i<argc; i++)
         printf("argv[%d] = %s\n", i, argv[i]);
-    
-    //    pause();
     
     printf("INT_MAX = %d, INT_MIN = %d\n", INT_MAX, INT_MIN);
     
@@ -46,14 +43,12 @@ int main(int argc, const char * argv[])
     itob(INT_MAX, s, 2);
     assert(strcmp(s, "1111111111111111111111111111111") == 0);
     printf("INT_MAX = %s\n", s);
-
     
     // Test 2: INT_MAX
     itob(INT_MAX, s, 8);
     assert(strcmp(s, "17777777777") == 0);
     printf("INT_MAX = %s\n", s);
     
-
     // Test 3: INT_MAX
     itob(INT_MAX, s, 10);
     assert(strcmp(s, "2147483647") == 0);
@@ -69,7 +64,21 @@ int main(int argc, const char * argv[])
     assert(strcmp(s, "-10000000000000000000000000000000") == 0);
     printf("INT_MAX = %s\n", s);
 
-
+    // Test 5: INT_MIN
+    itob(INT_MIN, s, 8);
+    assert(strcmp(s, "-20000000000") == 0);
+    printf("INT_MAX = %s\n", s);
+    
+    // Test 5: INT_MIN
+    itob(INT_MIN, s, 10);
+    assert(strcmp(s, "-2147483648") == 0);
+    printf("INT_MAX = %s\n", s);
+    
+    // Test 5: INT_MIN
+    itob(INT_MIN, s, 16);
+    assert(strcmp(s, "-80000000") == 0);
+    printf("INT_MAX = %s\n", s);
+    
     return 0;
 }
 
@@ -104,7 +113,6 @@ void itob(int n, char s[], int b) {
         s[i++] = '-';
     s[i] = '\0';
     
-    
     // correct for last digit
     if (minval) {
         addone(s, b);
@@ -113,44 +121,52 @@ void itob(int n, char s[], int b) {
     reverse(s);
 }
 
+// add one to a string representation of a number, where s[0] = least significant digit
 void addone(char s[], int b)
 {
     int i;
     char c;
     int carry = 0;
     
-    switch (b)
+    i = 0;
+    while ((c=s[i])!='\0')
     {
-        case BIN:
-            i = 0;
-            while ((c=s[i])!='\0' && c!='-')
-            {
-                if (c==digits[b-1])
-                {
-                    s[i] = '0';
-                    carry = 1;
-                }
-                else
-                {
-                    s[i] = nextdigit(c); // increment to next digit
-                    carry = 0;
-                    break;
-                }
-                
-                i++;
-            }
-            // TODO: minus sign?
-            if (carry)
-            {
-                s[i]   = '1';
-                s[i+1] = '-';
-                s[i+2] = '\0';
-            }
+        if (c == digits[b-1])
+        {
+            s[i] = '0';
+            carry = 1;
+        }
+        else if (c == '-')
+        {
+            s[i] = '-';
             break;
-        case OCT:
+        }
+        else // not the last digit
+        {
+            s[i] = increment(c,b);
+            carry = 0;
             break;
-        default:
-            exit(1);
+        }
+        
+        i++;
+    }
+    // if carry == 1, then we got to the end of the current number
+    // string with a carry still to do. that means we have to add
+    // a '1' in the next column
+    if (carry) s[i++] = '1';
+    
+    // TODO: Bug at this point. i too small.
+    s[i] = '\0';
+}
+
+// returns '0' if there is a carry, otherwise returns next 'digit'
+char increment(char c, int b)
+{
+    if (c==digits[b-1])
+    {
+        return '0';
+    } else {
+        return nextdigit(c);
     }
 }
 
