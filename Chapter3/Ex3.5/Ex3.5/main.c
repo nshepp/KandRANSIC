@@ -79,6 +79,21 @@ int main(int argc, const char * argv[])
     assert(strcmp(s, "-80000000") == 0);
     printf("INT_MAX = %s\n", s);
     
+    // Test 6: BLOATER'S MIND
+    itob(0, s, 10);
+    assert(strcmp(s, "0") == 0);
+    printf("INT_MAX = %s\n", s);
+    
+    // Test 7: MEANING OF LIFE
+    itob(42, s, 10);
+    assert(strcmp(s, "42") == 0);
+    printf("INT_MAX = %s\n", s);
+
+    // Test 8: BLOATER
+    itob(-5555, s, 10);
+    assert(strcmp(s, "-5555") == 0);
+    printf("INT_MAX = %s\n", s);
+    
     return 0;
 }
 
@@ -131,31 +146,40 @@ void addone(char s[], int b)
     i = 0;
     while ((c=s[i])!='\0')
     {
-        if (c == digits[b-1])
+        if (i==0)
         {
-            s[i] = '0';
-            carry = 1;
+            if(c==digits[b-1])
+            {
+                s[i] = '0';
+                carry = 1;
+            } else {
+                s[i] = increment(c,b);
+                carry = 0;
+            }
         }
         else if (c == '-')
         {
-            s[i] = '-';
+            // if carry == 1, then we got to the end of the current number
+            // string with a carry still to do. that means we have to add
+            // a '1' in the next column
+            if (carry) s[i++] = '1';
+            s[i++] = '-';
             break;
         }
-        else // not the last digit
+        else if (carry==1 && c!='-')
         {
-            s[i] = increment(c,b);
-            carry = 0;
-            break;
+            if (c==digits[b-1])
+                s[i] = '0';
+            else
+            {
+                s[i] = increment(c,b);
+                carry = 0;
+            }
         }
         
         i++;
     }
-    // if carry == 1, then we got to the end of the current number
-    // string with a carry still to do. that means we have to add
-    // a '1' in the next column
-    if (carry) s[i++] = '1';
     
-    // TODO: Bug at this point. i too small.
     s[i] = '\0';
 }
 
