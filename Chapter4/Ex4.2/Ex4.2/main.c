@@ -8,12 +8,13 @@
 
 #include <stdio.h>
 #include <ctype.h>
+#include <math.h>
 
 double myatof(char s[]);
 
 int main(int argc, const char * argv[])
 {
-    char s[] = "-01.2";
+    char s[] = "-1.2e-3";
     double result;
     
     result = myatof(s);
@@ -23,8 +24,8 @@ int main(int argc, const char * argv[])
 
 double myatof(char s[])
 {
-    double val, power;
-    int i, sign;
+    double val, power, exp;
+    int i, sign, esign;
     
     for (i = 0; isspace(s[i]); i++) /* skip white space */
         ;
@@ -40,5 +41,13 @@ double myatof(char s[])
         val = 10.0 * val + (s[i] - '0');
         power *= 10.0;
     }
-    return sign * val / power;
+    if (s[i] == 'e')
+        i++;
+    esign = (s[i] == '-') ? -1 : 1;
+    if (s[i] == '+' || s[i] == '-')
+        i++;
+    for (exp = 0.0; isdigit(s[i]); i++)
+        exp = 10.0 * exp + (s[i] - '0');
+    
+    return (sign * val / power) * pow(10.0, esign * exp);
 }
