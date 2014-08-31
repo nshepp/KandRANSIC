@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "89FF0B6719AE52EC006F1CFA"
-               BuildableName = "Ex4.3"
-               BlueprintName = "Ex4.3"
-               ReferencedContainer = "container:Ex4.3.xcodeproj">
+               BlueprintIdentifier = "8993124219B3B24900451438"
+               BuildableName = "RevPolOrig"
+               BlueprintName = "RevPolOrig"
+               ReferencedContainer = "container:RevPolOrig.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,17 +32,17 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "89FF0B6719AE52EC006F1CFA"
-            BuildableName = "Ex4.3"
-            BlueprintName = "Ex4.3"
-            ReferencedContainer = "container:Ex4.3.xcodeproj">
+            BlueprintIdentifier = "8993124219B3B24900451438"
+            BuildableName = "RevPolOrig"
+            BlueprintName = "RevPolOrig"
+            ReferencedContainer = "container:RevPolOrig.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      launchStyle = "1"
+      launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
@@ -51,10 +51,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "89FF0B6719AE52EC006F1CFA"
-            BuildableName = "Ex4.3"
-            BlueprintName = "Ex4.3"
-            ReferencedContainer = "container:Ex4.3.xcodeproj">
+            BlueprintIdentifier = "8993124219B3B24900451438"
+            BuildableName = "RevPolOrig"
+            BlueprintName = "RevPolOrig"
+            ReferencedContainer = "container:RevPolOrig.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -69,10 +69,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "89FF0B6719AE52EC006F1CFA"
-            BuildableName = "Ex4.3"
-            BlueprintName = "Ex4.3"
-            ReferencedContainer = "container:Ex4.3.xcodeproj">
+            BlueprintIdentifier = "8993124219B3B24900451438"
+            BuildableName = "RevPolOrig"
+            BlueprintName = "RevPolOrig"
+            ReferencedContainer = "container:RevPolOrig.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

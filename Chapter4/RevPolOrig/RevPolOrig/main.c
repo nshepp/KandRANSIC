@@ -1,6 +1,6 @@
 //
 //  main.c
-//  Ex4.3
+//  RevPolOrig
 //
 //  Created by Andrew Sheppard on 8/27/14.
 //  Copyright (c) 2014 Andrew Sheppard. All rights reserved.
@@ -78,12 +78,12 @@ int main(int argc, const char * argv[])
 
 void push(double f)
 {
-
+    
     if (sp < MAXVAL)
         val[sp++] = f;
     else
         printf("error: stack full, can't push %g\n", f);
-        
+    
 }
 
 
@@ -115,7 +115,7 @@ int getop(char s[])
             ;
     if (c == '.')
         while (isdigit(s[++i] = c = getch()))
-    s[i] = '\0';
+            s[i] = '\0';
     if (c != EOF)
         myungetch(c);
     return NUMBER;
