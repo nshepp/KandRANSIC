@@ -62,6 +62,13 @@ int main(int argc, const char * argv[])
                 else
                     printf("error: zero divisor\n");
                 break;
+            case '%':
+                op2 = pop();
+                if (op2 != 0.0)
+                    push((int)pop() % (int)op2);
+                else
+                    printf("error: zero divisor\n");
+                break;
             case '\n':
                 printf("\t%.8g\n", pop());
                 break;
@@ -103,16 +110,24 @@ double pop(void)
 int getop(char s[])
 {
     int i, c;
+    char nextchar;
     
+    
+    /* skip whitespace */
     while ((s[0] = c = getch()) == ' ' || c == '\t')
         ;
+    
+    /* at this point, c is the first non-whitespace char */
+    nextchar = s[1];
     s[1] = '\0';
-    if (!isdigit(c) && c != '.')
-        return c;   /* not a number */
+    if (!isdigit(c) && c != '.' && (nextchar==' ' || nextchar=='\t' || nextchar=='\0'))
+        return c;   /* not a number, must be an op */
+    
     i = 0;
-    if (isdigit(c))  /* collect integer part */
+    if (isdigit(c) || c=='+' || c=='-')  /* collect integer part */
         while (isdigit(s[++i] = c = getch()))
             ;
+    
     if (c == '.')
         while (isdigit(s[++i] = c = getch()))
     s[i] = '\0';
