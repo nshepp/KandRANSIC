@@ -109,7 +109,7 @@ double pop(void)
 /* getop: get next operator or numeric operand */
 int getop(char s[])
 {
-    int i, c;
+    int i, c, op;
     char nextchar;
     
     
@@ -117,10 +117,25 @@ int getop(char s[])
     while ((s[0] = c = getch()) == ' ' || c == '\t')
         ;
     
+    /* plus or minus sign? followed by a number? or plus and minus operand? */
+    if (c=='+' || c=='-')
+    {
+        nextchar = getch();
+        if (isdigit(nextchar))
+            op = 0;
+        else
+            op = 1;
+        
+        myungetch(nextchar);
+    }
+    else if (isdigit(c))
+        op = 0;
+    else
+        op = 1;
+    
     /* at this point, c is the first non-whitespace char */
-    nextchar = s[1];
     s[1] = '\0';
-    if (!isdigit(c) && c != '.' && (nextchar==' ' || nextchar=='\t' || nextchar=='\0'))
+    if (op)
         return c;   /* not a number, must be an op */
     
     i = 0;
@@ -130,9 +145,13 @@ int getop(char s[])
     
     if (c == '.')
         while (isdigit(s[++i] = c = getch()))
+            ;
+    
     s[i] = '\0';
+    
     if (c != EOF)
         myungetch(c);
+    
     return NUMBER;
 }
 
